@@ -1,0 +1,45 @@
+{
+  "name": "cadence",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cadence — an AI presentation studio with a real layout engine and native exports.",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "tsx watch scripts/dev-api.ts",
+    "build": "tsc --noEmit && vite build",
+    "vercel-build": "npm run build",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1163.0",
+    "@aws-sdk/s3-request-presigner": "^3.1163.0",
+    "@clerk/backend": "^3.27.0",
+    "@clerk/clerk-js": "^6.42.3",
+    "@hono/vercel": "^1.0.1",
+    "@neon/config": "^1.11.3",
+    "@neon/env": "^1.6.15",
+    "@neondatabase/serverless": "^1.2.0",
+    "drizzle-orm": "^0.45.4",
+    "hono": "^4.13.16",
+    "html-to-image": "^1.11.13",
+    "jspdf": "^2.5.2",
+    "jszip": "^3.10.1",
+    "pptxgenjs": "^3.12.0",
+    "svix": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^2.1.6",
+    "@types/node": "^26.6.6",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.23.15",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

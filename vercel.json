@@ -1,0 +1,57 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist",
+  "installCommand": "npm ci --include=dev",
+  "functions": {
+    "api/[...route].ts": {
+      "maxDuration": 300,
+      "memory": 1024
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/s/:token",
+      "destination": "/viewer.html"
+    },
+    {
+      "source": "/((?!api(?:/|$)|assets(?:/|$)|viewer\\.html$).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/s/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/gc",
+      "schedule": "0 3 * * *"
+    }
+  ],
+  "framework": "vite"
+}
