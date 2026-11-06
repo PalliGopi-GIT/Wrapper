@@ -81,6 +81,9 @@ async function ensureUser(userId: string): Promise<UserRow> {
 }
 
 export async function requireUser(c: Context<AppEnv>, next: () => Promise<void>) {
+  if (!process.env.CLERK_SECRET_KEY || !process.env.VITE_CLERK_PUBLISHABLE_KEY || !process.env.DATABASE_URL) {
+    throw new HttpError(503, 'Account services are not configured yet')
+  }
   const state = await clerk().authenticateRequest(c.req.raw, {
     authorizedParties: appOrigins(),
   })

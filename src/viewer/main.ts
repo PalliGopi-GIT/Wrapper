@@ -4,7 +4,7 @@ import '../styles/slide.css'
 import type { Deck } from '../model/types'
 import { renderSlide, autofit } from '../render/slide'
 import { api, ApiError } from '../app/api'
-import { clerk, clerkAppearance, initClerk, isSignedIn } from '../app/auth'
+import { clerk, clerkAppearance, initClerk, showStartupError, clerkReady, isSignedIn } from '../app/auth'
 
 interface Gate {
   ownerName: string
@@ -27,9 +27,13 @@ const app = document.getElementById('app') as HTMLElement
 const token = location.pathname.match(/^\/s\/([^/]+)/)?.[1]
 const mode = new URLSearchParams(location.search).get('mode')
 
-await initClerk()
+await initClerk().catch((error: unknown) => {
+  showStartupError(app, error)
+})
 
-if (!token) {
+if (!clerkReady()) {
+  // Startup error is already rendered.
+} else if (!token) {
   renderFatal('This share link is invalid.')
 } else if (!isSignedIn()) {
   void renderGate()

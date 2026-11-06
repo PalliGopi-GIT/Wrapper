@@ -34,5 +34,8 @@ export function startRouter(render: (route: Route) => void) {
 }
 
 export function redirectUrl(): string {
-  return new URLSearchParams(location.search).get('redirect_url') || '/'
+  const target = new URLSearchParams(location.search).get('redirect_url') || '/'
+  return target.startsWith('/') && !target.startsWith('//') && !target.includes('\\')
+    ? target
+    : '/'
 }

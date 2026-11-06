@@ -1,7 +1,7 @@
 import './styles/app.css'
 import './styles/slide.css'
 
-import { initClerk, isSignedIn, mountAuthPage } from './app/auth'
+import { initClerk, showStartupError, clerkReady, isSignedIn, mountAuthPage } from './app/auth'
 import { renderDashboard } from './app/dashboard'
 import { renderEditor } from './app/editor'
 import { navigate, parseRoute, redirectUrl, startRouter } from './app/router'
@@ -9,9 +9,11 @@ import { navigate, parseRoute, redirectUrl, startRouter } from './app/router'
 const app = document.getElementById('app')
 if (!app) throw new Error('Missing #app')
 
-await initClerk()
+await initClerk().catch((error: unknown) => {
+  showStartupError(app, error)
+})
 
-startRouter((route) => {
+if (clerkReady()) startRouter((route) => {
   if (!isSignedIn()) {
     if (route.name === 'sign-in' || route.name === 'sign-up') {
       mountAuthPage(app, route.name, { redirectUrl: redirectUrl() })

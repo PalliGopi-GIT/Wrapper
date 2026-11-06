@@ -21,7 +21,7 @@ function loadEnv() {
 
 loadEnv()
 
-const { app } = await import('../api/_lib/app')
+const { app } = await import('../server/_lib/app')
 const port = Number(process.env.API_PORT || 8787)
 
 serve({ fetch: app.fetch, port }, (info) => {

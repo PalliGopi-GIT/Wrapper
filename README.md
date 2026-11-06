@@ -103,7 +103,7 @@ The model returns semantic slide types (`statement`, `bullets`, `compare`, `proc
 
 ## Model access
 
-Models are called by the API (`api/_lib/ai.ts`), never by the browser. Set `AI_GATEWAY_API_KEY` on the server. The client sends `{ operation, deckId, request }` to `/api/ai/*`; the server builds the prompt, enforces the model allow-list and per-user quotas, and logs every call to `ai_usage`.
+Models are called by the API (`server/_lib/ai.ts`), never by the browser. Set `AI_GATEWAY_API_KEY` on the server. The client sends `{ operation, deckId, request }` to `/api/ai/*`; the server builds the prompt, enforces the model allow-list and per-user quotas, and logs every call to `ai_usage`.
 
 Open **Settings** to see whether the server, database and storage are configured. If the Gateway is unavailable or a quota is exhausted, **Compose** falls back to the offline draft composer.
 

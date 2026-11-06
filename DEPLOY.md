@@ -30,6 +30,10 @@ The UI is a static Vite bundle. The API is a single serverless function. There i
 
 ---
 
+## Deploy before adding service keys
+
+Builds do not require service keys. Without Clerk configuration the browser displays a setup message; account features need Clerk and Neon. Add VITE_CLERK_PUBLISHABLE_KEY and redeploy to enable sign-in. Other keys enable their corresponding services. See DEPLOYMENT-REVIEW.md for findings and limits.
+
 ## 1. Environment variables
 
 Set these in **Vercel → Project → Settings → Environment Variables** for Production and Preview. Only `VITE_`-prefixed values reach the browser.
@@ -37,7 +41,7 @@ Set these in **Vercel → Project → Settings → Environment Variables** for P
 | Variable | Scope | Required | Value / notes |
 |---|---|---|---|
 | `DATABASE_URL` | runtime | yes | Neon **pooled** string (`-pooler` host) |
-| `DATABASE_URL_UNPOOLED` | build | yes | Neon **direct** string; used by `npm run db:migrate` |
+| `DATABASE_URL_UNPOOLED` | migration only | for migrations | Neon **direct** string; used by `npm run db:migrate` |
 | `VITE_CLERK_PUBLISHABLE_KEY` | build + browser | yes | `pk_live_…` for production, `pk_test_…` for preview/dev |
 | `CLERK_SECRET_KEY` | runtime | yes | `sk_live_…` / `sk_test_…`; never expose to the browser |
 | `CLERK_WEBHOOK_SIGNING_SECRET` | runtime | yes | `whsec_…` from the Clerk webhook endpoint |
@@ -76,7 +80,7 @@ npm ci --include=dev
 DATABASE_URL_UNPOOLED="postgres://…" npm run db:migrate
 ```
 
-Migrations are **not** part of the Vercel build. This keeps the build independent of database credentials, so a missing or sleeping database cannot fail a deploy. Run `npm run db:migrate` from CI or locally before a release that changes `db/schema.ts`. The current Neon project already has both migrations applied.
+Migrations are **not** part of the Vercel build. This keeps the build independent of database credentials, so a missing or sleeping database cannot fail a deploy. Run `npm run db:migrate` from CI or locally before a release that changes `db/schema.ts`. Verify migration status in your own Neon project before enabling the app.
 
 For preview deployments, install the **Neon ↔ Vercel integration** so each preview gets its own branch and `DATABASE_URL` is injected automatically. Without it, previews share the production database.
 
@@ -137,7 +141,7 @@ If you enabled the `pub-…r2.dev` public URL, anyone with a key can read the bu
 ## 5. Vercel AI Gateway
 
 1. Create an AI Gateway key and set `AI_GATEWAY_API_KEY`.
-2. The server allow-list lives in `api/_lib/ai.ts`. Add models there; never pass an arbitrary client slug through.
+2. The server allow-list lives in `server/_lib/ai.ts`. Add models there; never pass an arbitrary client slug through.
 3. Per-user limits are enforced from `ai_usage` (30/hour, 200/day).
 4. If the Gateway returns **402**, raise the limit in **Vercel → AI Gateway → Budgets & Spend**. The API surfaces the exact reason; Compose falls back to the offline draft.
 

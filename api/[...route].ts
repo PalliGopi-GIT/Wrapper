@@ -1,6 +1,4 @@
-import { handle } from '@hono/vercel'
-import { app } from './_lib/app'
+import { app } from '../server/_lib/app'
 
-export const config = { runtime: 'nodejs' }
-
-export default handle(app)
+// Vercel's Web Standard Node.js handler.
+export default { fetch: app.fetch }

@@ -398,7 +398,7 @@ x/{userId}/{exportId}.{ext}           server-stored exports (future; 7-day lifec
 5. Server client:
 
 ```ts
-// api/_lib/r2.ts
+// server/_lib/r2.ts
 import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
@@ -569,7 +569,7 @@ sequenceDiagram
 
 ## 6. AI on the server
 
-Port `callModel` from `src/ai/client.ts` to `api/_lib/ai.ts`, using only the gateway (`https://ai-gateway.vercel.sh/v1`) and `AI_GATEWAY_API_KEY`. Prompt construction can stay shared, since `src/ai/prompts.ts` is pure. The browser then sends `{ operation, deckId, request }`, and the server builds the prompt, calls the model and returns the normalised JSON.
+Port `callModel` from `src/ai/client.ts` to `server/_lib/ai.ts`, using only the gateway (`https://ai-gateway.vercel.sh/v1`) and `AI_GATEWAY_API_KEY`. Prompt construction can stay shared, since `src/ai/prompts.ts` is pure. The browser then sends `{ operation, deckId, request }`, and the server builds the prompt, calls the model and returns the normalised JSON.
 
 - **Delete** the browser key path, the `anthropic-dangerous-direct-browser-access` header and the Settings key field (or keep BYO-key as an explicit power-user option).
 - Allow-list the models (`anthropic/claude-sonnet-4.5`, etc.). Never pass an arbitrary client-supplied slug through.

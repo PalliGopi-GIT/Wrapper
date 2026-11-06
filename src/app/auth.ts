@@ -43,7 +43,7 @@ export function initClerk(): Promise<Clerk> {
   pending = (async () => {
     const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
     if (!publishableKey) {
-      throw new Error('Missing VITE_CLERK_PUBLISHABLE_KEY. Add it to .env.local and restart.')
+      throw new Error('Missing VITE_CLERK_PUBLISHABLE_KEY. Add it in Vercel Project Settings > Environment Variables and redeploy, or in .env.local for local development.')
     }
 
     const clerkDomain = atob(publishableKey.split('_')[2]).slice(0, -1)
@@ -148,4 +148,20 @@ export function mountAuthPage(
           : { source: 'app' },
     })
   }
+}
+
+export function clerkReady(): boolean {
+  return instance !== null
+}
+
+export function showStartupError(root: HTMLElement, error: unknown): void {
+  root.replaceChildren()
+  const box = document.createElement('div')
+  box.className = 'app-error'
+  const title = document.createElement('h2')
+  title.textContent = 'Cadence setup required'
+  const detail = document.createElement('p')
+  detail.textContent = error instanceof Error ? error.message : 'Authentication could not start. Please reload and try again.'
+  box.append(title, detail)
+  root.append(box)
 }
