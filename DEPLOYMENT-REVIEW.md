@@ -27,7 +27,9 @@ For uploads/server exports configure R2_ENDPOINT, R2_BUCKET, R2_ACCESS_KEY_ID an
 
 ## Remaining limits
 
-The production failure was reproduced and its runtime log inspected. The import fix passes the plain-Node smoke check, full Vite build and native PPTX contract check locally; deployed verification is still pending. The local machine has Node 22.23.2; Vercel uses Node 24.x. Clerk and Neon variables were still absent during the latest environment-name check. Cloud service flows require credentials and a migrated database. `/api/health` reports environment-variable presence, not live service connectivity.
+The production failure was reproduced and its runtime log inspected. The import fix passes the plain-Node smoke check, full Vite build and native PPTX contract check locally. Commit `ce37ba7` was pushed and deployed as `dpl_2cBX8RfXytsHD8vuRmtoZQuS1xFv` (READY). On 2026-11-07, production `/api/health` returned 200 JSON, `/api/not-a-route` returned 404 JSON, and `/api/decks` returned the expected 503 JSON without account credentials. `/`, `/sign-in`, `/sign-up`, `/decks/test` and `/s/test` returned 200 HTML. A recent error/fatal log query scoped to this deployment returned no records. These routing checks do not verify rendered authentication or deck persistence.
+
+The local machine has Node 22.23.2; Vercel uses Node 24.x. Clerk and Neon variables were still absent during the latest environment-name check. Cloud service flows require credentials and a migrated database. `/api/health` reports environment-variable presence, not live service connectivity.
 
 The initial npm audit reported 8 findings (4 moderate, 3 high, 1 critical), including jsPDF and Vite. These are separate dependency/security work; no forced major upgrades were applied during deployment repair. ARCHITECTURE.md contains historical planning sections; use this review and current source for the implemented layout.
 
