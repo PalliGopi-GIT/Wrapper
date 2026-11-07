@@ -1,9 +1,9 @@
 import { and, eq, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
-import { db } from '../_lib/db'
-import { HttpError, requireEnv } from '../_lib/http'
-import { deleteObject } from '../_lib/r2'
-import { assets, deckExports, decks } from '../../db/schema'
+import { db } from '../_lib/db.js'
+import { HttpError, requireEnv } from '../_lib/http.js'
+import { deleteObject } from '../_lib/r2.js'
+import { assets, deckExports, decks } from '../../db/schema.js'
 
 const routes = new Hono()
 

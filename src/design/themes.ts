@@ -1,4 +1,4 @@
-import type { DeckSettings } from '../model/types'
+import type { DeckSettings } from '../model/types.js'
 
 export type Deco =
   | 'none'

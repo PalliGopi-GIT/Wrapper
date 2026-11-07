@@ -1,6 +1,6 @@
 import { DeleteObjectCommand, GetObjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { requireEnv } from './http'
+import { requireEnv } from './http.js'
 
 const DEFAULT_ENDPOINT =
   'https://c1bb96e74762c8da2a13c9ef3b56d667.r2.cloudflarestorage.com/assets'

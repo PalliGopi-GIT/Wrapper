@@ -1,9 +1,9 @@
 import { eq, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { Webhook } from 'svix'
-import { db } from '../_lib/db'
-import { HttpError, requireEnv } from '../_lib/http'
-import { decks, users, webhookEvents } from '../../db/schema'
+import { db } from '../_lib/db.js'
+import { HttpError, requireEnv } from '../_lib/http.js'
+import { decks, users, webhookEvents } from '../../db/schema.js'
 
 interface ClerkUserData {
   id: string

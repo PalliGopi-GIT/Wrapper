@@ -1,7 +1,7 @@
-import type { AIConfig, Deck, Slide, SlideType } from '../model/types'
-import { defaultSettings } from '../model/types'
-import { uid } from '../store'
-import { callModel, extractJSON } from './client'
+import type { AIConfig, Deck, Slide, SlideType } from '../model/types.js'
+import { defaultSettings } from '../model/types.js'
+import { uid } from '../store.js'
+import { callModel, extractJSON } from './client.js'
 import {
   BASE_SYSTEM,
   DECK_OP_SYSTEM,
@@ -13,7 +13,7 @@ import {
   buildOutlinePrompt,
   buildSlideRewritePrompt,
   type GenRequest,
-} from './prompts'
+} from './prompts.js'
 
 const TYPES: SlideType[] = [
   'title',

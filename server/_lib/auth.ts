@@ -1,9 +1,9 @@
 import { createClerkClient, type ClerkClient } from '@clerk/backend'
 import { eq, sql } from 'drizzle-orm'
 import type { Context } from 'hono'
-import { users, type UserRow } from '../../db/schema'
-import { db } from './db'
-import { HttpError, appOrigins } from './http'
+import { users, type UserRow } from '../../db/schema.js'
+import { db } from './db.js'
+import { HttpError, appOrigins } from './http.js'
 
 export type Role = 'creator' | 'viewer'
 

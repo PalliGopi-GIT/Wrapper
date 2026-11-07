@@ -1,4 +1,4 @@
-import { autofit } from '../render/slide'
+import { autofit } from '../render/slide.js'
 
 export function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob)

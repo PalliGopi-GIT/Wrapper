@@ -14,7 +14,7 @@ import {
   uniqueIndex,
   uuid,
 } from 'drizzle-orm/pg-core'
-import type { DeckSettings, Slide } from '../src/model/types'
+import type { DeckSettings, Slide } from '../src/model/types.js'
 
 const citext = customType<{ data: string }>({
   dataType: () => 'citext',

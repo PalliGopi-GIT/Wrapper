@@ -1,19 +1,19 @@
 import { randomBytes } from 'node:crypto'
 import { and, desc, eq, inArray } from 'drizzle-orm'
 import { Hono } from 'hono'
-import { requireCreator, type AppEnv } from '../_lib/auth'
-import { ownedDeck } from '../_lib/access'
-import { db } from '../_lib/db'
-import { HttpError } from '../_lib/http'
-import { sharePatch, sharePayload } from '../_lib/schemas'
-import { readJson } from '../_lib/validate'
+import { requireCreator, type AppEnv } from '../_lib/auth.js'
+import { ownedDeck } from '../_lib/access.js'
+import { db } from '../_lib/db.js'
+import { HttpError } from '../_lib/http.js'
+import { sharePatch, sharePayload } from '../_lib/schemas.js'
+import { readJson } from '../_lib/validate.js'
 import {
   shareAccessGrants,
   shareInvites,
   shareLinks,
   shareViewSessions,
   users,
-} from '../../db/schema'
+} from '../../db/schema.js'
 
 const ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 

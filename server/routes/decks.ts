@@ -1,14 +1,14 @@
 import { Hono } from 'hono'
 import { and, eq, isNull, sql } from 'drizzle-orm'
-import { requireCreator, type AppEnv } from '../_lib/auth'
-import { ownedDeck } from '../_lib/access'
-import { db } from '../_lib/db'
-import { HttpError } from '../_lib/http'
-import { hasDataImage } from '../_lib/schemas'
-import { readJson } from '../_lib/validate'
-import { deckPayload, deckUpdate } from '../_lib/schemas'
-import { decks } from '../../db/schema'
-import { defaultSettings, type DeckSettings, type Slide } from '../../src/model/types'
+import { requireCreator, type AppEnv } from '../_lib/auth.js'
+import { ownedDeck } from '../_lib/access.js'
+import { db } from '../_lib/db.js'
+import { HttpError } from '../_lib/http.js'
+import { hasDataImage } from '../_lib/schemas.js'
+import { readJson } from '../_lib/validate.js'
+import { deckPayload, deckUpdate } from '../_lib/schemas.js'
+import { decks } from '../../db/schema.js'
+import { defaultSettings, type DeckSettings, type Slide } from '../../src/model/types.js'
 
 const routes = new Hono<AppEnv>()
 routes.use('*', requireCreator)

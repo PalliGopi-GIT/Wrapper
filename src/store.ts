@@ -1,5 +1,5 @@
-import type { Deck, Slide, UIState, DeckSettings } from './model/types'
-import { defaultSettings } from './model/types'
+import type { Deck, Slide, UIState, DeckSettings } from './model/types.js'
+import { defaultSettings } from './model/types.js'
 
 export type ChangeKind = 'deck' | 'ui' | 'selection' | 'theme' | 'generate' | 'inline' | 'settings'
 type Listener = (kind: ChangeKind) => void

@@ -1,12 +1,12 @@
-import type { AIConfig } from '../../src/model/types'
+import type { AIConfig } from '../../src/model/types.js'
 import {
   addSlide,
   editDeck,
   generateDeck,
   outlineDeck,
   reviseSlide,
-} from '../../src/ai/generate'
-import { HttpError, requireEnv } from './http'
+} from '../../src/ai/generate.js'
+import { HttpError, requireEnv } from './http.js'
 
 export const ALLOWED_MODELS = [
   'anthropic/claude-sonnet-4.5',

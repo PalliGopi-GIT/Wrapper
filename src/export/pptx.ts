@@ -1,7 +1,7 @@
 import PptxGenJS from 'pptxgenjs'
-import type { Deck, Slide, DeckSettings } from '../model/types'
-import { getTheme, type Theme } from '../design/themes'
-import { safeName } from './common'
+import type { Deck, Slide, DeckSettings } from '../model/types.js'
+import { getTheme, type Theme } from '../design/themes.js'
+import { safeName } from './common.js'
 
 /**
  * Native PowerPoint generation.

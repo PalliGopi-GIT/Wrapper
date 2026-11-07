@@ -10,9 +10,9 @@ import {
   type DeckRow,
   type ShareLinkRow,
   type UserRow,
-} from '../../db/schema'
-import { db } from './db'
-import { HttpError } from './http'
+} from '../../db/schema.js'
+import { db } from './db.js'
+import { HttpError } from './http.js'
 
 export async function ownedDeck(userId: string, deckId: string): Promise<DeckRow> {
   if (!isUuid(deckId)) throw new HttpError(404, 'Deck not found')

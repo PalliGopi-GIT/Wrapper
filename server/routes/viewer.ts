@@ -1,14 +1,14 @@
 import { and, eq, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
 import type { z } from 'zod'
-import { requireUser, type AppEnv } from '../_lib/auth'
-import { canAccessShare, hasGrant, resolveShare, upsertGrant } from '../_lib/access'
-import { db } from '../_lib/db'
-import { HttpError } from '../_lib/http'
-import { moveRequest } from '../_lib/schemas'
-import { readJson } from '../_lib/validate'
-import { deckVersions, shareViewSessions, users } from '../../db/schema'
-import type { Deck, Slide } from '../../src/model/types'
+import { requireUser, type AppEnv } from '../_lib/auth.js'
+import { canAccessShare, hasGrant, resolveShare, upsertGrant } from '../_lib/access.js'
+import { db } from '../_lib/db.js'
+import { HttpError } from '../_lib/http.js'
+import { moveRequest } from '../_lib/schemas.js'
+import { readJson } from '../_lib/validate.js'
+import { deckVersions, shareViewSessions, users } from '../../db/schema.js'
+import type { Deck, Slide } from '../../src/model/types.js'
 
 const routes = new Hono<AppEnv>()
 

@@ -9,14 +9,14 @@ import {
   generateDeck,
   outlineDeck,
   reviseSlide,
-} from '../_lib/ai'
-import { requireCreator, type AppEnv } from '../_lib/auth'
-import { db } from '../_lib/db'
-import { HttpError } from '../_lib/http'
-import { genRequest } from '../_lib/schemas'
-import { readJson } from '../_lib/validate'
-import { aiUsage } from '../../db/schema'
-import type { Deck, Slide } from '../../src/model/types'
+} from '../_lib/ai.js'
+import { requireCreator, type AppEnv } from '../_lib/auth.js'
+import { db } from '../_lib/db.js'
+import { HttpError } from '../_lib/http.js'
+import { genRequest } from '../_lib/schemas.js'
+import { readJson } from '../_lib/validate.js'
+import { aiUsage } from '../../db/schema.js'
+import type { Deck, Slide } from '../../src/model/types.js'
 
 const routes = new Hono<AppEnv>()
 routes.use('*', requireCreator)

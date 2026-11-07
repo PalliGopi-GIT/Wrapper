@@ -1,10 +1,10 @@
 import { Hono } from 'hono'
 import { and, desc, eq } from 'drizzle-orm'
-import { requireCreator, type AppEnv } from '../_lib/auth'
-import { nextDeckVersion, ownedDeck } from '../_lib/access'
-import { db } from '../_lib/db'
-import { readJson } from '../_lib/validate'
-import { deckVersions } from '../../db/schema'
+import { requireCreator, type AppEnv } from '../_lib/auth.js'
+import { nextDeckVersion, ownedDeck } from '../_lib/access.js'
+import { db } from '../_lib/db.js'
+import { readJson } from '../_lib/validate.js'
+import { deckVersions } from '../../db/schema.js'
 import { z } from 'zod'
 
 const routes = new Hono<AppEnv>()

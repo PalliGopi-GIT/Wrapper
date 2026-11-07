@@ -1,7 +1,7 @@
 import { neon } from '@neondatabase/serverless'
 import { drizzle, type NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import * as schema from '../../db/schema'
-import { requireEnv } from './http'
+import * as schema from '../../db/schema.js'
+import { requireEnv } from './http.js'
 
 let client: NeonHttpDatabase<typeof schema> | null = null
 

@@ -14,6 +14,8 @@ Only `api/[...route].ts` belongs under `api/`. API implementation lives in `serv
 - Both browser entry points previously awaited Clerk without error handling, causing a blank page when its key or external bundle was unavailable. They now show a readable setup/error message. This does not bypass authentication or provide a functional offline account.
 - Authenticated API requests return 503 when account/database configuration is absent. Health and unknown-route responses remain available without keys.
 - Restrict sign-in redirects to local paths.
+- Production runtime logs on 2026-11-07 identified `ERR_MODULE_NOT_FOUND` for `/var/task/server/_lib/app`: emitted ESM retained extensionless relative imports. Added explicit `.js` specifiers throughout the function's transitive local imports, including shared AI/model/export modules. TypeScript resolves these to source `.ts` files; deployed Node resolves emitted `.js` files.
+- Added `scripts/deploy-native-smoke.mjs`, which emits JavaScript and imports the API with plain Node. Unlike the tsx smoke check, this catches Node ESM resolution failures before deployment.
 
 ## Vercel setup
 
@@ -25,7 +27,7 @@ For uploads/server exports configure R2_ENDPOINT, R2_BUCKET, R2_ACCESS_KEY_ID an
 
 ## Remaining limits
 
-The actual failed deployment log and account configuration were not available during local inspection. Local build success is not proof of a successful Vercel deployment. The local machine has Node 22.23.2; the project requests Node 24.x. Cloud service flows require credentials and a migrated database. `/api/health` reports environment-variable presence, not live service connectivity.
+The production failure was reproduced and its runtime log inspected. The import fix passes the plain-Node smoke check, full Vite build and native PPTX contract check locally; deployed verification is still pending. The local machine has Node 22.23.2; Vercel uses Node 24.x. Clerk and Neon variables were still absent during the latest environment-name check. Cloud service flows require credentials and a migrated database. `/api/health` reports environment-variable presence, not live service connectivity.
 
 The initial npm audit reported 8 findings (4 moderate, 3 high, 1 critical), including jsPDF and Vite. These are separate dependency/security work; no forced major upgrades were applied during deployment repair. ARCHITECTURE.md contains historical planning sections; use this review and current source for the implemented layout.
 
@@ -34,6 +36,7 @@ The initial npm audit reported 8 findings (4 moderate, 3 high, 1 critical), incl
 ```sh
 npm ci --include=dev
 npm run build
+node scripts/deploy-native-smoke.mjs
 npx tsx scripts/deploy-smoke.ts
 npx tsx scripts/pptx-contract.ts
 ```

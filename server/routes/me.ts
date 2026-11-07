@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
 import { eq, sql } from 'drizzle-orm'
-import { clerk, requireUser, type AppEnv } from '../_lib/auth'
-import { db } from '../_lib/db'
-import { users } from '../../db/schema'
+import { clerk, requireUser, type AppEnv } from '../_lib/auth.js'
+import { db } from '../_lib/db.js'
+import { users } from '../../db/schema.js'
 
 const routes = new Hono<AppEnv>()
 

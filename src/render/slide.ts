@@ -1,5 +1,5 @@
-import type { ChartSpec, Deck, Slide } from '../model/types'
-import { getTheme, themeVars } from '../design/themes'
+import type { ChartSpec, Deck, Slide } from '../model/types.js'
+import { getTheme, themeVars } from '../design/themes.js'
 
 const esc = (s?: string | number): string =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>

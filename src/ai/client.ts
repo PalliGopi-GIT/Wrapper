@@ -1,4 +1,4 @@
-import type { AIConfig, AIProvider } from '../model/types'
+import type { AIConfig, AIProvider } from '../model/types.js'
 
 export const PROVIDERS: {
   id: AIProvider['id']

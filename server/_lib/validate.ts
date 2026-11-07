@@ -1,6 +1,6 @@
 import type { Context } from 'hono'
 import type { z } from 'zod'
-import { HttpError } from './http'
+import { HttpError } from './http.js'
 
 export async function readJson<T extends z.ZodType>(
   c: Context,
